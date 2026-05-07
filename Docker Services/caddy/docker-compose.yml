@@ -1,0 +1,40 @@
+# =============================================================================
+# Caddy Reverse Proxy — Portainer Stack
+# =============================================================================
+# BEFORE DEPLOYING:
+#   1. SSH into 360server and create the Caddyfile on the host:
+#        mkdir -p /opt/caddy
+#        nano /opt/caddy/Caddyfile    (paste your Caddyfile contents)
+#
+#   2. Create the external volume for cert persistence:
+#        docker volume create caddy_data
+#
+#   3. In Portainer → Stacks → Add Stack, paste this compose file
+#      and add the environment variables below.
+# =============================================================================
+
+services:
+  caddy:
+    image: caddybuilds/caddy-cloudflare:latest
+    container_name: caddy
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - /media/data/configs/caddy/conf/Caddyfile:/etc/caddy/Caddyfile
+      - /media/data/configs/caddy/data:/data
+      - /media/data/configs/caddy/config:/config
+      - /media/data/configs/caddy/certs:/certs
+    environment:
+      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
+      - ACME_EMAIL=${ACME_EMAIL}
+    network_mode: host
+volumes:
+  caddy_data:
+    external: true
+  caddy_config:
+    
