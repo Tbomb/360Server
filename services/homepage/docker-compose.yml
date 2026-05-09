@@ -1,0 +1,19 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    ports:
+      - 3000:3000
+    volumes:
+      - /media/data/configs/homepage:/app/config # Make sure your local config directory exists
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS}
+      PGID: ${PGID}
+      PUID: ${PUID}
+      HOMEPAGE_VAR_QBIT_USER: ${HOMEPAGE_VAR_QBIT_USER}
+      HOMEPAGE_VAR_QBIT_PASS: ${HOMEPAGE_VAR_QBIT_PASS}
+      HOMEPAGE_VAR_PORTAINER_KEY: ${HOMEPAGE_VAR_PORTAINER_KEY}
+      HOMEPAGE_VAR_PLEX_TOKEN: ${HOMEPAGE_VAR_PLEX_TOKEN}
+      HOMEPAGE_VAR_ADGUARD_PASS: ${HOMEPAGE_VAR_ADGUARD_PASS}
+      HOMEPAGE_VAR_ADGUARD_USER: ${HOMEPAGE_VAR_ADGUARD_USER}

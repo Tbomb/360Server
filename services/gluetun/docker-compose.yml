@@ -1,0 +1,21 @@
+version: "3"
+services:
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun_vpn    
+    cap_add:
+      - NET_ADMIN
+    ports: #make sure to include these for qbittorrent to work
+      - 60000:60000
+      - 60000:60000/udp
+      - 9091:9091      
+    environment:
+      - VPN_SERVICE_PROVIDER=${VPN_SERVICE_PROVIDER}
+      - VPN_TYPE=${VPN_TYPE}
+      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
+      - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
+      - SERVER_CITIES=${SERVER_CITIES}
+      - WIREGUARD_ENDPOINT_PORT=${WIREGUARD_ENDPOINT_PORT}
+    volumes:
+      - /home/tharding/Docker/Gluetun:/gluetun
+    restart: unless-stopped

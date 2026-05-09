@@ -1,0 +1,17 @@
+version: "3"
+services:
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    environment:
+      - PLEX_UID=1000
+      - PLEX_GID=1000
+      - TZ=America/Los_Angeles
+      - PLEX_CLAIM=${PLEX_CLAIM}
+    network_mode: host
+    volumes:
+      - /media/data/configs/plex-media/config:/config
+      - /media/data/configs/plex-media/transcode:/transcode
+      - /media/data/Plex-Media:/data
+      - /media/data/Downloads:/Downloads

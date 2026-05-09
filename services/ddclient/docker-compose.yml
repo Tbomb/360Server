@@ -1,0 +1,15 @@
+version: "3"
+services:
+  ddclient:
+    image: linuxserver/ddclient
+    container_name: ddclient
+    ports: #make sure to include these for qbittorrent to work
+      - 85:80
+      - 446:443
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    volumes:
+      - /media/data/configs/ddclient:/config
+    restart: unless-stopped
