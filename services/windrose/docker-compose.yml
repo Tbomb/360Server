@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     stop_grace_period: 30s
     env_file:
-      - /media/data/configs/windrose/.env
+      - /media/data/configs/windrose/server.env
     volumes:
       - /home/tharding/Docker/windrose/server-files:/home/steam/server-files
     labels:
