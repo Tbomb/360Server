@@ -2,7 +2,7 @@ version: "3"
 services:
   gluetun:
     image: qmcgaw/gluetun
-    container_name: gluetun_vpn    
+    container_name: gluetun_vpn
     cap_add:
       - NET_ADMIN
     ports: #make sure to include these for qbittorrent to work
@@ -19,3 +19,9 @@ services:
     volumes:
       - /home/tharding/Docker/Gluetun:/gluetun
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/gluetun-entrypoint", "healthcheck"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
