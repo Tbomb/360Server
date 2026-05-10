@@ -5,8 +5,8 @@ services:
     restart: unless-stopped
     stop_grace_period: 30s
     env_file:
-      - .env
+      - /media/data/configs/windrose/.env
     volumes:
-      - /media/data/windrose/server-files:/home/steam/server-files
+      - /media/data/configs/windrose/server-files:/home/steam/server-files
     labels:
       - "dockhand.update=false"
