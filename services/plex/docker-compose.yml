@@ -9,6 +9,10 @@ services:
       - PLEX_GID=1000
       - TZ=America/Los_Angeles
       - PLEX_CLAIM=${PLEX_CLAIM}
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - 992
     network_mode: host
     volumes:
       - /media/data/configs/plex-media/config:/config
