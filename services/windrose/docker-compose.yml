@@ -4,6 +4,16 @@ services:
     container_name: windrose
     restart: unless-stopped
     stop_grace_period: 30s
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UPDATE_ON_START=${UPDATE_ON_START}
+      - SERVER_NAME=${SERVER_NAME}
+      - INVITE_CODE=${INVITE_CODE}
+      - SERVER_PASSWORD=${SERVER_PASSWORD}
+      - MAX_PLAYERS=${MAX_PLAYERS}
+      - P2P_PROXY_ADDRESS=${P2P_PROXY_ADDRESS}
+      - GENERATE_SETTINGS=${GENERATE_SETTINGS}
     env_file:
       - /media/data/configs/windrose/server.env
     volumes:
