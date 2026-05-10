@@ -9,8 +9,8 @@ services:
       - TZ=America/Los_Angeles
       - WEBUI_PORT=9091
     volumes:
-      - /media/data/configs/qbittorrent/.config:/config
-      - /media/data/configs/qbittorrent/.local:/.local
+      - /media/data/Backups/qbittorrent/.config:/config
+      - /media/data/Backups/qbittorrent/.local:/.local
       - /media/data/Downloads:/Downloads
       - /media/data/Plex-Media:/Plex-Media
     network_mode: "container:gluetun_vpn" #change gluetun to your VPN container   
