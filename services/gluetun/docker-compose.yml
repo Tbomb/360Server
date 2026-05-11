@@ -2,7 +2,7 @@ version: "3"
 services:
   gluetun:
     image: qmcgaw/gluetun
-    container_name: gluetun_vpn
+    container_name: gluetun
     cap_add:
       - NET_ADMIN
     ports: #make sure to include these for qbittorrent to work
@@ -25,3 +25,20 @@ services:
       timeout: 10s
       retries: 3
       start_period: 30s
+      
+  qbittorrent:
+    image: linuxserver/qbittorrent:5.1.4
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+      - WEBUI_PORT=9091
+    volumes:
+      - /home/tharding/Docker/qbittorrent/config:/config
+      - /home/tharding/Docker/qbittorrent/local:/.local
+      - /media/data/Downloads:/Downloads
+      - /media/data/Plex-Media:/Plex-Media
+    network_mode: "service:gluetun" #change gluetun to your VPN container   
+
+    restart: unless-stopped
