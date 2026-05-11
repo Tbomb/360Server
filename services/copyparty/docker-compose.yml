@@ -9,7 +9,7 @@ services:
       - /media/data/configs/copyparty:/cfg:z
       - /media/data/Share:/media/data:z
       - /media/timemachine:/media/data/timemachine
-      - /media/data/tharding:/media/tommy
+      - /media/data/tommy:/media/tommy
 
     environment:
       LD_PRELOAD: /usr/lib/libmimalloc-secure.so.NOPE
