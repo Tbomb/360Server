@@ -27,7 +27,7 @@ services:
       start_period: 30s
       
   qbittorrent:
-    image: linuxserver/qbittorrent:5.1.4
+    image: linuxserver/qbittorrent:latest
     container_name: qbittorrent
     environment:
       - PUID=1000
