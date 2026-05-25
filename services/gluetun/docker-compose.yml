@@ -34,6 +34,7 @@ services:
       - PGID=1000
       - TZ=America/Los_Angeles
       - WEBUI_PORT=9091
+      - DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
     volumes:
       - /home/tharding/Docker/qbittorrent/config:/config
       - /home/tharding/Docker/qbittorrent/local:/.local
