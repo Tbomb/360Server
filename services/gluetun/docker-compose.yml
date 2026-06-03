@@ -5,10 +5,10 @@ services:
     container_name: gluetun
     cap_add:
       - NET_ADMIN
-    ports: #make sure to include these for qbittorrent to work
-      - 60000:60000
-      - 60000:60000/udp
-      - 9091:9091      
+    ports: 
+      - 60000:60000 #port used for torrent connections
+      - 60000:60000/udp #udp port used for torrent connections
+      - ${UI_WEBPORT}:${UI_WEBPORT}      
     environment:
       - VPN_SERVICE_PROVIDER=${VPN_SERVICE_PROVIDER}
       - VPN_TYPE=${VPN_TYPE}
@@ -17,7 +17,7 @@ services:
       - SERVER_CITIES=${SERVER_CITIES}
       - WIREGUARD_ENDPOINT_PORT=${WIREGUARD_ENDPOINT_PORT}
     volumes:
-      - /home/tharding/Docker/Gluetun:/gluetun
+      - ${GLUETUN_DATA}:/gluetun
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "/gluetun-entrypoint", "healthcheck"]
@@ -32,14 +32,14 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Los_Angeles
-      - WEBUI_PORT=9091
-      - DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
+      - TZ=${TIMEZONE}
+      - WEBUI_PORT=${UI_WEBPORT}
+      - DOCKER_MODS=${DOCKER_MODS}
     volumes:
-      - /home/tharding/Docker/qbittorrent/config:/config
-      - /home/tharding/Docker/qbittorrent/local:/.local
-      - /media/data/Downloads:/Downloads
-      - /media/data/Plex-Media:/Plex-Media
+      - ${QBITTORRENT_CONFIG}:/config
+      - ${QBITTORRENT_TORRENT_DATA}:/.local
+      - ${DOWNLOADS_DATA}:/Downloads
+      - ${PLEX_DATA}:/Plex-Media
     network_mode: "service:gluetun" #change gluetun to your VPN container   
 
     restart: unless-stopped
