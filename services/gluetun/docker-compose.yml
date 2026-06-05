@@ -40,6 +40,8 @@ services:
       - ${QBITTORRENT_TORRENT_DATA}:/.local
       - ${DOWNLOADS_DATA}:/Downloads
       - ${PLEX_DATA}:/Plex-Media
-    network_mode: "service:gluetun" #change gluetun to your VPN container   
+    network_mode: "service:gluetun" #change gluetun to your VPN container
+    labels:
+      - "dockhand.update=false"
 
     restart: unless-stopped
