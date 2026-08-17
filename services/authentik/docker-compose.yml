@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
     volumes:
-      - /media/data/config/authentik/postgres:/var/lib/postgresql/data
+      - /media/data/configs/authentik/postgres:/var/lib/postgresql/data
 
     healthcheck:
       test:
@@ -45,8 +45,8 @@ services:
       AUTHENTIK_ERROR_REPORTING__ENABLED: "false"
 
     volumes:
-      - /media/data/config/authentik/media:/data
-      - /media/data/config/authentik/templates:/templates
+      - /media/data/configs/authentik/media:/data
+      - /media/data/configs/authentik/templates:/templates
 
     ports:
       - "9000:9000"
@@ -77,8 +77,8 @@ services:
       AUTHENTIK_ERROR_REPORTING__ENABLED: "false"
 
     volumes:
-      - /media/data/config/authentik/media:/data
-      - /media/data/config/authentik/templates:/templates
+      - /media/data/configs/authentik/media:/data
+      - /media/data/configs/authentik/templates:/templates
 
       # Required for Authentik-managed Docker outposts.
       - /var/run/docker.sock:/var/run/docker.sock
