@@ -28,7 +28,7 @@ services:
 
 
   server:
-    image: ghcr.io/goauthentik/server:2026.6
+    image: docker.io/authentik/server:2026.8
     container_name: authentik-server
     restart: unless-stopped
 
@@ -60,7 +60,7 @@ services:
 
 
   worker:
-    image: ghcr.io/goauthentik/server:2026.6
+    image: docker.io/authentik/server:2026.8
     container_name: authentik-worker
     restart: unless-stopped
 
