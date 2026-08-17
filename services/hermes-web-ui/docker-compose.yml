@@ -1,0 +1,29 @@
+services:
+  hermes-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: hermes-webui
+
+    ports:
+      - "3001:8080"
+
+    volumes:
+      - hermes-webui-data:/app/backend/data
+
+    environment:
+      ENABLE_OLLAMA_API: "false"
+      OPENAI_API_BASE_URL: "${HERMES_BASE_URL}/v1"
+      OPENAI_API_KEY: "${HERMES_API_KEY}"
+      OAUTH_CLIENT_ID: "${AUTHENTIK_CLIENT_ID}"
+      OAUTH_CLIENT_SECRET: "${AUTHENTIK_CLIENT_SECRET}"
+    
+      OPENID_PROVIDER_URL: "${AUTH_URL}/application/o/hermes-webui/.well-known/openid-configuration"
+    
+      OAUTH_PROVIDER_NAME: "Authentik"
+      OAUTH_SCOPES: "openid email profile"
+    
+      OPENID_REDIRECT_URI: "${HERMES_WEBUI_URL}/oauth/oidc/callback"
+
+    restart: unless-stopped
+
+volumes:
+  hermes-webui-data:
