@@ -1,0 +1,19 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    mem_limit: 20g        # caps Ollama's ceiling
+    memswap_limit: 20g    # prevents swap spillover
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_NUM_PARALLEL=1       # CPU: don't try to parallelize
+      - OLLAMA_MAX_LOADED_MODELS=1  # only keep one model in RAM at a time
+    # no deploy block needed — CPU only
+      - OLLAMA_KEEP_ALIVE=10m      # keeps model warm between Hermes requests
+volumes:
+  ollama_data:
