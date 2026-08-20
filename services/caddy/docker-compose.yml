@@ -24,6 +24,8 @@ services:
       - "80:80"
       - "443:443"
       - "443:443/udp"
+    expose:
+      - "2019" #this is the default admin port
     volumes:
       - /media/data/configs/caddy/conf/Caddyfile:/etc/caddy/Caddyfile
       - /media/data/configs/caddy/data:/data
