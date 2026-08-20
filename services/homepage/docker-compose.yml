@@ -4,6 +4,8 @@ services:
     container_name: homepage
     ports:
       - 3000:3000
+    group_add:
+      - "989"
     volumes:
       - /media/data/configs/homepage:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock:ro
