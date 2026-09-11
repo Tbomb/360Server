@@ -1,0 +1,24 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:12.0
+    container_name: jellyfin
+    user: "1000:1000"
+    ports:
+      - 8096:8096/tcp
+      - 7359:7359/udp
+    volumes:
+      - /media/data/configs/jellyfin/config:/config
+      - /var/cache/jellyfin:/cache
+      - /media/data/Plex-Media:/data:ro
+      - /media/data/Downloads:/Downloads:ro
+    restart: 'unless-stopped'
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - "992"
+    environment:
+      - TZ=America/Los_Angeles
+    network_mode: host
+    # for docker healthcheck to pass if running in host network mode
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
